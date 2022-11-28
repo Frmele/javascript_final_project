@@ -48,7 +48,7 @@ while (answers.length < questions.length) {
 
 
   if (question.includes("your gender")){
-    var val = /F|M|X/i.test(answer)
+    var val = /F|M|X/.test(answer)
     if (val !== true) {
       console.log("Invalid answer, try: F/M/X.")
       continue;
@@ -63,7 +63,7 @@ while (answers.length < questions.length) {
 }
 
   if (question.includes("interested")){
-    var val = /F|M|X|B/i.test(answer)
+    var val = /F|M|X|B/.test(answer)
     if (val !== true) {
       console.log("Invalid answer, try: F/M/X/B.")
       continue;
@@ -130,7 +130,7 @@ if (question.includes("your age")){
 
 }
 //Make sure that all number values are stored as number and not as string.
-answers[3] = parseInt(answers[2])
+answers[2] = parseInt(answers[2])
 answers[6] = parseInt(answers[6])
 answers[7] = parseInt(answers[7])
 
@@ -168,7 +168,7 @@ console.log("Ready to find your match?")
 let matches=[];
 for ( let i=0; i < mockData.length; i++)
   { 
-    let people=mockData[i];
+    let people = mockData[i];
       if (
       // age
       (people.age >= profile.min_age_interest) 
@@ -192,7 +192,27 @@ for ( let i=0; i < mockData.length; i++)
   }
 
 
-console.log(matches[1])
+console.log({matches})
+
+
+let matchCount = Object.keys(matches).length;
+if (matchCount === 0 )
+{console.log("Sorry, we can not find the match for you. Try it later.");}
+ else  
+{ let n=0;
+  for (n =0; n <matchCount; n++)
+    {
+      if (n===0)
+      {
+    console.log(`Yes, there are ${matchCount} matches. Here are all the matches for you. Enjoy!`); 
+    console.log(`Nr ${n+1}: ${matches[n].first_name} ${matches[n].last_name} (${matches[n].gender}), age ${matches[n].age},  lives in ${matches[n].location}`);
+      }
+      else
+      {
+        console.log(`Nr ${n+1}: ${matches[n].first_name} ${matches[n].last_name} (${matches[n].gender}), age ${matches[n].age},  lives in ${matches[n].location}`);
+      }
+    }
+}
 /* All tasks
 
 
