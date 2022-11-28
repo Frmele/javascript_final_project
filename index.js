@@ -47,83 +47,83 @@ while (answers.length < questions.length) {
   }
 
 
-  if (question.includes("your gender")){
+  if (question.includes("your gender")) {
     var val = /F|M|X/.test(answer)
     if (val !== true) {
       console.log("Invalid answer, try: F/M/X.")
       continue;
+    }
   }
-}
 
-   if (question.includes("your gender")){
+  if (question.includes("your gender")) {
     if (answer.length > 1) {
       console.log("Invalid answer, try: F/M/X.")
       continue;
+    }
   }
-}
 
-  if (question.includes("interested")){
+  if (question.includes("interested")) {
     var val = /F|M|X|B/.test(answer)
     if (val !== true) {
       console.log("Invalid answer, try: F/M/X/B.")
       continue;
+    }
   }
-}
 
-   if (question.includes("interested")){
+  if (question.includes("interested")) {
     if (answer.length > 1) {
       console.log("Invalid answer, try: F/M/X/B.")
       continue;
-  }
-}
-
-  if (question.includes("age")){
-    if (isNaN(answer)) {
-      console.log("Invalid answer, please add a number.") 
-    continue
     }
-}
+  }
+
+  if (question.includes("age")) {
+    if (isNaN(answer)) {
+      console.log("Invalid answer, please add a number.")
+      continue
+    }
+  }
 
   //Make sure the minimum interested age and maximum interested age is 18 or higher.
 
-if (question.includes("your age")){
+  if (question.includes("your age")) {
     if (answer < 18) {
-      console.log("Invalid answer, you can subscribe only if older than 18.") 
-    continue
+      console.log("Invalid answer, you can subscribe only if older than 18.")
+      continue
     }
-}
-
-  if (question.includes("minimum")){
-    if (answer < 18) {
-      console.log("Invalid answer, please add a number bigger than 18.") 
-    continue
-    }
-}
-
-  if (question.includes("maximum")){
-    if (answer < 18) {
-      console.log("Invalid answer, please add a number bigger than 18.") 
-    continue
-    }
-}
-
-//Make sure the maximum interested age is higher than the minimum interested age.
-  if (question.includes("maximum")){
-    if (answer < answers[6]) {
-      console.log("Invalid answer, please add a number bigger than the minimum age.") 
-    continue
-    }
-}
-
-//Make sure that location can only be “rural” or “city”.
-  if (question.includes("Where")){
-      var val = /rural|city/i.test(answer)
-        if (val !== true) {
-          console.log("Invalid answer, try: rural or city.")
-      continue;
-      }
   }
-  
+
+  if (question.includes("minimum")) {
+    if (answer < 18) {
+      console.log("Invalid answer, please add a number bigger than 18.")
+      continue
+    }
+  }
+
+  if (question.includes("maximum")) {
+    if (answer < 18) {
+      console.log("Invalid answer, please add a number bigger than 18.")
+      continue
+    }
+  }
+
+  //Make sure the maximum interested age is higher than the minimum interested age.
+  if (question.includes("maximum")) {
+    if (answer < answers[6]) {
+      console.log("Invalid answer, please add a number bigger than the minimum age.")
+      continue
+    }
+  }
+
+  //Make sure that location can only be “rural” or “city”.
+  if (question.includes("Where")) {
+    var val = /rural|city/i.test(answer)
+    if (val !== true) {
+      console.log("Invalid answer, try: rural or city.")
+      continue;
+    }
+  }
+
 
   answers.push(answer);
   i++;
@@ -157,61 +157,55 @@ profile.location = answers[5]
 profile.min_age_interest = answers[6];
 profile.max_age_interest = answers[7];
 
-console.table({profile});
+console.table({ profile });
 
-console.log( `Your name is ${profile.first_name}  ${profile.last_name}, you are ${profile.age} years old. Your gender is ${profile.gender}. You are interested in gender ${profile.gender_interest}. You live in ${profile.location}. You'd like to find someone between ${profile.min_age_interest} and ${profile.max_age_interest} years old.`);
+console.log(`Your name is ${profile.first_name}  ${profile.last_name}, you are ${profile.age} years old. Your gender is ${profile.gender}. You are interested in gender ${profile.gender_interest}. You live in ${profile.location}. You'd like to find someone between ${profile.min_age_interest} and ${profile.max_age_interest} years old.`);
 
 console.log("Ready to find your match?")
 
 //Create a loop that iterates on the mockData array
 
-let matches=[];
-for ( let i=0; i < mockData.length; i++)
-  { 
-    let people = mockData[i];
-      if (
-      // age
-      (people.age >= profile.min_age_interest) 
-      && (people.age <= profile.max_age_interest) 
-      && (profile.age >= people.min_age_interest) 
-      && (profile.age <= people.max_age_interest) 
-      // gender
-      && ( (people.gender === profile.gender_interest)
-        || (people.gender === "F" && profile.gender_interest === "B")
-        || (people.gender === "M" && profile.gender_interest === "B") )
-      && ( (profile.gender === people.gender_interest)
-        || (profile.gender === "F" && people.gender_interest === "B")
-        || (profile.gender === "M" && people.gender_interest === "B")
-         )
-      // location
-      && (people.location.toLowerCase() == profile.location.toLowerCase())
-   )
-       {
-      matches.push(people);       
-       }
+let matches = [];
+for (let i = 0; i < mockData.length; i++) {
+  let people = mockData[i];
+  if (
+    // age
+    (people.age >= profile.min_age_interest)
+    && (people.age <= profile.max_age_interest)
+    && (profile.age >= people.min_age_interest)
+    && (profile.age <= people.max_age_interest)
+    // gender
+    && ((people.gender === profile.gender_interest)
+      || (people.gender === "F" && profile.gender_interest === "B")
+      || (people.gender === "M" && profile.gender_interest === "B"))
+    && ((profile.gender === people.gender_interest)
+      || (profile.gender === "F" && people.gender_interest === "B")
+      || (profile.gender === "M" && people.gender_interest === "B")
+    )
+    // location
+    && (people.location.toLowerCase() == profile.location.toLowerCase())
+  ) {
+    matches.push(people);
   }
+}
 
 
-console.log({matches})
+console.log({ matches })
 
 
 let matchCount = Object.keys(matches).length;
-if (matchCount === 0 )
-{console.log("Sorry, we can not find the match for you. Try it later.");}
- else  
-{ let n=0;
-  for (n =0; n <matchCount; n++)
-    {
-      if (n===0)
-      {
-    console.log(`Yes, there are ${matchCount} matches. Here are all the matches for you. Enjoy!`); 
-    console.log(`Nr ${n+1}: ${matches[n].first_name} ${matches[n].last_name} (${matches[n].gender}), age ${matches[n].age},  lives in ${matches[n].location}`);
-      }
-      else
-      {
-        console.log(`Nr ${n+1}: ${matches[n].first_name} ${matches[n].last_name} (${matches[n].gender}), age ${matches[n].age},  lives in ${matches[n].location}`);
-      }
+if (matchCount === 0) { console.log("Sorry, we can not find the match for you. Try it later."); }
+else {
+  let n = 0;
+  for (n = 0; n < matchCount; n++) {
+    if (n === 0) {
+      console.log(`Yes, there are ${matchCount} matches. Here are all the matches for you. Enjoy!`);
+      console.log(`Nr ${n + 1}: ${matches[n].first_name} ${matches[n].last_name} (${matches[n].gender}), age ${matches[n].age},  lives in ${matches[n].location}`);
     }
+    else {
+      console.log(`Nr ${n + 1}: ${matches[n].first_name} ${matches[n].last_name} (${matches[n].gender}), age ${matches[n].age},  lives in ${matches[n].location}`);
+    }
+  }
 }
 /* All tasks
 
@@ -239,13 +233,4 @@ Show the number of matches.
 
 
 During development of the matching process it can help to create a filled-in profile object so you don’t have to answer all the questions each time you run the program.
-
-
-How to open a REPL?
-+
-Grow!
-
-Replace the data in mockData.js with your new data and test your new code. Make sure you still use:
-
-module.exports = {
-                 data: // [ your data set ] */
+*/
